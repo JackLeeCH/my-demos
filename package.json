@@ -1,0 +1,19 @@
+{
+  "name": "my-demos",
+  "version": "1.0.0",
+  "description": "Use nodejs is convenient",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackLeeCH/my-demos.git"
+  },
+  "author": "JackLeeCH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JackLeeCH/my-demos/issues"
+  },
+  "homepage": "https://github.com/JackLeeCH/my-demos#readme"
+}
