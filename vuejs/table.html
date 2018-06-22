@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../libs/css/bootstrap.css" />
+<link rel="stylesheet" href="css/table.css" />
+<title>Vuejs表格页面模板</title>
+</head>
+<script type="text/x-template" id="page">
+	<div class="page-options">
+		<ul class="pagination">
+			<li :class="current == 1 ? 'disabled' : ''" @click="current!=1 && goto(1)">
+				<a href="#">首页</a>
+			</li>
+			<li :class="current == 1 ? 'disabled' : ''" @click="current!=1 && current-- && goto(current)">
+				<a href="#">上一页</a>
+			</li>
+			<li v-for="index in pages" @click="goto(index)" :class="{'active':current == index}" :key="index">
+				<a href="#">{{index}}</a>
+			</li>
+			<li :class="current == allpage ? 'disabled' : ''" @click="current!=allpage && current++ && goto(current++)">
+				<a href="#">下一页</a>
+			</li>
+			<li :class="current == allpage ? 'disabled' : ''" @click="current!=allpage && goto(allpage)">
+				<a href="#">尾页</a>
+			</li>
+		</ul>
+		
+		<div class="goto-box">
+			结果共计<span class="totalpage" style="color:#337ab7;">{{allpage}}</span>页，
+			跳转到<input type="text" name="pageindex" id="pageindex" class="form-control" v-model="targetpage" />页
+			<a class="btn btn-primary" id="goto" @click="goto(targetpage)">确认</a>
+		</div>
+	</div>
+</script>
+<body id="app">
+
+<header>
+    <h3>页面标题</h3>
+</header>
+
+<div class="container" id="container">
+    <div class="row v-space">
+        <div class="col-md-6 col-sm-12 v-space form-horizontal">
+            <div class="row form-group">
+                <label class="col-sm-3 control-label" for="cpName">姓名：</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="text" v-model="query.cp_name" id="cpName" placeholder="查询关键字" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 v-space">
+            <a class="btn btn-primary" v-on:click="querySearch()"><span class="glyphicon glyphicon-search"></span>查询</a>
+            <a class="btn btn-primary" v-on:click="queryReset()"><span class="glyphicon glyphicon-refresh"></span>重置</a>
+        </div>
+    </div>
+
+	<div class="main">
+		<div class="result-box">
+			<table class="table table-bordered" id="result-table" border="1" style="border-collapse: collapse;">
+				<thead>
+					<tr>
+						<th>姓名</th>
+						<th>性别</th>
+						<th>年龄</th>
+						<th>生日</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(key, index) in data">
+						<td>{{key.name}}</td>
+						<td>{{key.sex}}</td>
+						<td>{{key.age}}</td>
+						<td>{{key.birthday | dateFormat}}</td>
+						<td>
+							<a class="btn btn-sm btn-primary" v-on:click="edit(key.id, key.name)">编辑</a>
+							<a class="btn btn-sm btn-primary" v-on:click="dele(key.id, key.name)">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			
+		<page v-bind:ops="pageoption"></page>
+	</div>
+</div>
+
+<footer class="copyright-box text-center">
+	<span class="copyright-en">Copyright 2018-. All Right Reserved.</span>
+</footer>
+
+<script type="text/javascript" src="../libs/js/jquery-1.11.3.min.js" ></script>
+<script type="text/javascript" src="../libs/js/vue.min.js" ></script>
+<script type="text/javascript" src="js/table.js" ></script>
+</body>
+</html>
